@@ -170,12 +170,12 @@ function construct_post(post_data){
 
 // Загружает посты из массива posts и добавляет их в колонки
 function show_all_posts(posts){
-  const content_columns = $('.content-column');
+  const content_container = $('#content-container');
   // Конструируем посты для каждого элемента переданного массива
   posts.map(value => {
     let temp_post = construct_post(value);
     if (temp_post != null)
-      temp_post.appendTo(content_columns[0]);
+      temp_post.appendTo(content_container[0]);
   });
   // $('<br>').appendTo($('#older-posts-button'));
 }
