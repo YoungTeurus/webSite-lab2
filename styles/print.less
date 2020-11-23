@@ -101,6 +101,12 @@
   @media (min-width: @content_block_normal_size){
     width: @content_block_normal_size;
   }
+  &>.content-image{
+    @media (max-width: @content_block_normal_size){
+      width: 100%;
+      height: auto;
+    }
+  }
 
   margin-bottom: 25px;
   display: flex;

@@ -11,6 +11,7 @@ const post_types = {
   forum: "forum"
 }
 
+// Массив данных постов:
 let posts = [
   {
     id: 1,
@@ -18,8 +19,8 @@ let posts = [
     title: "Aenean Malesuada Consectetur Risus",
     text: "Donec id elit non mi porta gravida at eget metus. Praesent commodo cursus magna, vel scelerisque nisl consectetur mollis ornare vel leo.",
     photo_src: "imgs/content-img-1.png",
-    date: new Date(Date.UTC(2020, 11, 23, 19, 35)),
-    likes: 32
+    date: new Date(Date.UTC(2020, 10, 1, 19, 35)),
+    likes: 132
   },
   {
     id: 2,
@@ -27,7 +28,7 @@ let posts = [
     title: "Ullamcorper Ipsum Parturient Cursus Etiam",
     text: "Nulla vitae elit libero, a pharetra augue aenean leo quam. Pellentesque ornare sem lacinia quam venenatis Nulla vitae elit libero, a pharetra augue aenean leo quam. Pellentesque ornare sem lacinia quam venenatis Nulla vitae elit libero, a pharetra augue aenean leo quam. Pellentesque ornare sem lacinia quam venenatis Nulla vitae elit libero, a pharetra augue aenean leo quam. Pellentesque ornare sem lacinia quam venenatis Nulla vitae elit libero, a pharetra augue aenean leo quam. Pellentesque ornare sem lacinia quam venenatis Nulla vitae elit libero, a pharetra augue aenean leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.",
     video_src: "imgs/content-img-3.png",
-    date: new Date(Date.UTC(2020, 11, 23, 19, 35)),
+    date: new Date(Date.UTC(2020, 10, 8, 19, 35)),
     likes: 47
   },
   {
@@ -40,8 +41,8 @@ let posts = [
     music_title: "Beautiful Song",
     music_band: "Awesome Group",
     music_album: "Self-titled",
-    date: new Date(Date.UTC(2020, 11, 23, 19, 35)),
-    likes: 32
+    date: new Date(Date.UTC(2020, 10, 14, 19, 35)),
+    likes: 12
   },
   {
     id: 4,
@@ -49,7 +50,7 @@ let posts = [
     title: "Dolor Purus Aenean Ultricies",
     text: "Cras mattis consectetur purus sit amet fermentum nulla vitae elit.",
     photo_src: "imgs/content-img-2.png",
-    date: new Date(Date.UTC(2020, 11, 23, 19, 35)),
+    date: new Date(Date.UTC(2020, 10, 16, 19, 35)),
     likes: 27
   },
   {
@@ -57,7 +58,7 @@ let posts = [
     type: post_types.article,
     title: "Tristique Risus Mattis Ullamcorper",
     text: "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nullam quis risus eget urna mollis.\n" + "\n" + "Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit consectetur.",
-    date: new Date(Date.UTC(2020, 11, 23, 19, 35)),
+    date: new Date(Date.UTC(2020, 10, 19, 19, 35)),
     likes: 18
   },
   {
@@ -65,8 +66,8 @@ let posts = [
     type: post_types.quote,
     quote: "Aenean eu leo quam. Pellentesque ornare lacinia quam venenatis vestibulum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nullam quis risus eget mollis.",
     author: "John Doe",
-    date: new Date(Date.UTC(2020, 11, 23, 19, 35)),
-    likes: 32
+    date: new Date(Date.UTC(2020, 10, 22, 19, 35)),
+    likes: 632
   },
   {
     id: 7,
@@ -77,10 +78,19 @@ let posts = [
         "<b>Ted</b>: Commodo cursus magna, vel scelerisque nisl consectetur et." +
         "<br>" +
         "<b>Barney</b>: Nullam quis risus eget mollis.",
-    date: new Date(Date.UTC(2020, 11, 23, 19, 35)),
+    date: new Date(Date.UTC(2020, 10, 24, 19, 35)),
     likes: 29
   },
 ]
+
+// Очищает список постов
+function clear_posts() {
+  let content_blocks = $('.content-block');
+  // Если есть хотя бы 1 пост:
+  if (content_blocks.length !== 0){
+    content_blocks.remove();
+  }
+}
 
 // Конструирует пост, возвращая jQuery элемент, соответствующий посту
 function construct_post(post_data){
@@ -163,13 +173,13 @@ function construct_post(post_data){
 
   content_footer.appendTo(content_block);
 
-  console.log(content_block.clientHeight);
-
   return content_block;
 }
 
 // Загружает посты из массива posts и добавляет их в колонки
 function show_all_posts(posts){
+  // Очищаем уже загруженные посты:
+  clear_posts();
   const content_container = $('#content-container');
   // Конструируем посты для каждого элемента переданного массива
   posts.map(value => {
@@ -198,9 +208,133 @@ function switch_print_version(){
   window.scrollTo(0,0);
 }
 
+function filter_posts(event){
+  let selected_post_types_array = [];
+  let selected_post_types = {
+    article: $("#type-article")[0].checked,
+    photo: $("#type-photo")[0].checked,
+    photo_album: $("#type-photo_album")[0].checked,
+    video: $("#type-video")[0].checked,
+    music: $("#type-music")[0].checked,
+    quote: $("#type-quote")[0].checked,
+    forum: $("#type-forum")[0].checked,
+  }
+
+  // Составляем массив строк - типов, которые были выбраны.
+  // entries возвращает массив массивов, где value[0] - ключ объекта,
+  // value[1] - значение ключа.
+  Object.entries(selected_post_types).map(value => {
+    if (value[1]){
+      selected_post_types_array.push(value[0]);
+    }
+  })
+
+  // Выбран ли хотя бы один тип постов?
+  let any_post_type_selected = selected_post_types_array.length > 0;
+
+  // Выбранное количество лайков:
+  let post_likes_checked = $('input[name="post-likes"]:checked');
+  let selected_post_likes = post_likes_checked.length !== 0 ? post_likes_checked.val(): null;
+  // let selected_post_likes = valueIfExists('input[name="post-likes"]:checked');
+
+  // Выбран ли тип даты размещения поста?
+  let any_post_date_selected = true;
+  let date_from = null;
+  let date_to = null;
+
+  // Выбранный тип даты размещения поста:
+  // Если выбран тип "Не позднее":
+  let date_sooner = $("#date-sooner");
+  let date_from_to = $("#date-from-to");
+  // if ($("#date-sooner")[0].checked)
+  if (date_sooner.length !== 0 ? date_sooner[0].checked : false){
+    // Насколько старым может быть пост для отображения:
+    let num_of_days = $('input[name="post-date-sooner"]:checked').val() || null;
+    if (num_of_days == null){
+      // Если был выбран тип отбора, но не было выбрано количество дней,
+      // считается, что выбор не был сделан.
+      any_post_date_selected = false;
+    }
+    else{
+      date_from = new Date(Date.now() - num_of_days * (24*60*60*1000));
+    }
+  }
+  // Если выбран тип "С ... по":
+  // else if ($("#date-from-to")[0].checked){
+  else if (date_from_to.length !== 0 ? date_from_to[0].checked : false){
+    let string_date_from = $('#post-date-from').val(),
+        string_date_to = $('#post-date-to').val();
+    // Если обе даты не выбраны:
+    if (string_date_from === "" && string_date_to === ""){
+      any_post_date_selected = false;
+    }
+    else{
+      // Если хотя бы какая-то из дат выбрана:
+      if (string_date_from !== ""){
+        date_from = new Date(string_date_from);
+      }
+      if (string_date_to !== ""){
+        date_to = new Date(string_date_to);
+      }
+    }
+  }
+  // Если не выбран ни один тип:
+  else{
+    any_post_date_selected = false;
+  }
+
+  // console.log("Распарсинг настроек фильтра прошёл успешно!");
+
+  // Если оказалось, что не выбрана ни одна из настроек фильтра, возвращаем все посты на место:
+  if (!(any_post_date_selected || any_post_type_selected || selected_post_likes !== null)){
+    show_all_posts(posts);
+  }
+  else{
+    // Если была выбрана хотя бы одна из настроек фильтра:
+    // Создаём массив новых постов:
+    let new_posts = posts.filter(post =>{
+      if (any_post_type_selected){
+        // Если тип поста не был выбран, не добавляем его в массив
+        if (!selected_post_types_array.includes(post.type)){
+          return false;
+        }
+      }
+      if (selected_post_likes !== null){
+        // Если у поста меньше лайков, чем было выбрано
+        if (post.likes < selected_post_likes){
+          return false;
+        }
+      }
+      if (any_post_date_selected){
+        if (date_from !== null){
+          if (post.date < date_from){
+            return false;
+          }
+        }
+        if (date_to !== null){
+          if (post.date > date_to){
+            return false;
+          }
+        }
+      }
+      return true;
+    })
+
+    show_all_posts(new_posts);
+  }
+
+  // event.preventDefault();
+}
+
 // Выполняется при полной загрузке страницы
 $(document).ready( () => {
   $("#print-version-button").on("click", switch_print_version);
+  $('input[name="post-date-sooner"]').on("click", () => {$('#date-sooner')[0].checked = true;});
+
+  $('input[name="post-date-from-to"]').on("click", () => {$('#date-from-to')[0].checked = true;});
+  $('.filter-settings input').on("click", filter_posts);
+
+  $("#filter-reset").on("click", (e) => {show_all_posts(posts); e.preventDefault();});
 
   show_all_posts(posts);
 })

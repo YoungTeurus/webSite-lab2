@@ -75,6 +75,12 @@
     width: 465px;
   }
 }
+@media (max-width: 465px) {
+  .content-block > .content-image {
+    width: 100%;
+    height: auto;
+  }
+}
 .content-block .content-date {
   font-family: 'Open Sans', sans-serif;
   font-weight: bold;

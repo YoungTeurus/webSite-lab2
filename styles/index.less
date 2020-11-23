@@ -174,13 +174,38 @@ body{
   }
 }
 
-.content-column{
-  max-width: @content_block_normal_size;
+.filter-settings{
+  background: @grayish;
+
+  display: flex;
+  flex-direction: row;
+
+  margin-bottom: 25px;
+
+  fieldset{
+    display: flex;
+    flex-direction: column;
+
+    &:not(:last-child){
+      margin-right: 15px;
+    }
+
+    span{
+      margin-left: 10px;
+    }
+  }
 }
 
 .content-block{
   @media (min-width: @content_block_normal_size){
     width: @content_block_normal_size;
+  }
+
+  &>.content-image{
+    @media (max-width: @content_block_normal_size){
+      width: 100%;
+      height: auto;
+    }
   }
 
   margin-bottom: 25px;
@@ -309,7 +334,6 @@ body{
     margin-right: 5px;
   }
 }
-
 
 .button-container{
   margin-top: 30px;
