@@ -1,0 +1,318 @@
+// Нормальный размер блока контента:
+@content_block_normal_size: 465px;
+// Минимальные размеры страницы, при которой будет отображаться страница с 2-мя столбиками:
+@min_normal_page_width: calc(@content_block_normal_size * 2 + 65px);
+
+// Переменные для картинки альбома:
+@album_back_width: 153px;
+@album_back_height: 125px;
+@album_back_left_margin: 11px;
+@album_cover_width: 120px;
+@album_cover_height: 120px;
+@album_cover_left_margin: 24px;
+
+// Цвета:
+@whitish: #f5f5f5;
+@grayish: #b9b9b9;
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.flex{
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+
+  &-row{
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  &-column {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &-evenly{
+    justify-content: space-evenly;
+  }
+
+  &-center{
+    justify-content: center;
+  }
+
+  &-between{
+    justify-content: space-between;
+  }
+
+  &-wrap{
+    flex-wrap: wrap;
+  }
+
+  &-end{
+    align-items: flex-end;
+  }
+}
+
+.text-logo{
+  font-family: 'Open Sans', sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 32px;
+
+  margin: 0 auto;
+
+  &:after{
+    margin-left: 1em;
+    content: "версия для печати";
+    font-size: 12px;
+  }
+}
+
+// Неотображаемые элементы
+.nav-container,
+.social-container,
+.footer-container,
+#older-posts-button{
+  display: none;
+}
+
+// Текст вверху страницы:
+.title-text{
+  @media (min-width: @min_normal_page_width) {
+    font-size: 22px;
+  }
+  width: 75%;
+  margin: 25px auto;
+  text-align: center;
+
+  font-family: 'Open Sans', sans-serif;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+// Блок контента
+.content-block{
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  border-bottom: solid 1px @grayish;
+
+  .content-date{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    color: black;
+  }
+
+  .content-title{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    color: black;
+
+    text-align: center;
+  }
+
+  .content-text{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: black;
+    margin-bottom: 19px;
+    padding: 0 20px;
+
+    &:first-of-type{
+      margin-top: 19px;
+    }
+
+    &>p:not(:last-of-type){
+      margin-bottom: 1em;
+    }
+  }
+
+  .content-quote{
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    font-weight: lighter;
+    font-size: 16px;
+    padding: 0 20px;
+    color: black;
+  }
+
+  .content-author{
+    &:before{
+      content: "-";
+      margin-right: 0.5em;
+    }
+
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: #797979;
+    margin-bottom: 25px;
+
+    padding: 0 20px;
+  }
+
+  .content-image{
+    width: 100%;
+    height: auto;
+  }
+
+  .music-container{
+    border-bottom: solid 1px @grayish;
+  }
+
+  .music-album-container {
+    position: relative;
+
+    .album-back{
+      position: absolute;
+      left: @album_back_left_margin;
+
+      max-width: @album_back_width;
+      max-height: @album_back_height;
+    }
+
+    .album-cover{
+      position: absolute;
+      left: @album_cover_left_margin;
+
+      max-width: @album_back_width;
+      max-height: @album_back_height;
+    }
+  }
+
+  .content-likes{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10px;
+    color: black;
+  }
+
+  .content-likes::before{
+    content: url("../imgs/content-like.svg");
+    margin-right: 5px;
+  }
+
+  .icon-photo::before{
+    content: url("../imgs/photo-icon.svg");
+    margin-right: 5px;
+  }
+
+  .icon-video::before{
+    content: url("../imgs/video-icon.svg");
+    margin-right: 5px;
+  }
+
+  .icon-article::before{
+    content: url("../imgs/article-icon.svg");
+    margin-right: 5px;
+  }
+
+  .icon-album::before{
+    content: url("../imgs/album-icon.svg");
+    margin-right: 5px;
+  }
+
+  .icon-quote::before{
+    content: url("../imgs/balloon-icon.svg");
+    margin-right: 5px;
+  }
+
+  .icon-forum::before{
+    content: url("../imgs/forum-icon.png");
+    margin-right: 5px;
+  }
+
+  .icon-music::before{
+    content: url("../imgs/note-icon.svg");
+    margin-right: 5px;
+  }
+
+  .icon-author::before{
+    content: url("../imgs/author-icon.svg");
+    margin-right: 5px;
+  }
+
+  .icon-disk::before{
+    content: url("../imgs/disk-icon.svg");
+    margin-right: 5px;
+  }
+
+  // Порядок отрисовки:
+  .content-footer{
+    order: 1;
+    border-bottom: solid 1px @grayish;
+  }
+
+  .content-title{
+    order: 2;
+  }
+
+  .content-image,
+  .music-container{
+    order: 3;
+  }
+
+  .content-text,
+  .content-quote{
+    order: 4;
+  }
+
+  .content-author{
+    order: 5;
+  }
+
+  // Отключённые элементы:
+  audio{
+    display: none;
+  }
+}
+
+.media-flex{
+  // "Две колонки" или расположение элементов в строчку:
+  @media (min-width: @min_normal_page_width) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  // "Одна колонка" или расположение элементов в столбец посередине
+  flex-direction: column;
+  align-items: center;
+}
+
+.content-column{
+  max-width: @content_block_normal_size;
+}
+
+.slim-button{
+  background: transparent;
+  border: solid 1px transparent;
+  text-decoration: underline @grayish;
+
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  color: @grayish;
+
+  cursor: pointer;
+  outline: none;
+}
+
+#print-version-button{
+  margin-right: 15px;
+}
+
+main {
+  @media (min-width: @min_normal_page_width){
+    max-width: 95%;
+  }
+  max-width: @min_normal_page_width;
+  margin: 0 auto;
+}

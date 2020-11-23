@@ -1,0 +1,448 @@
+// Нормальный размер блока контента:
+@content_block_normal_size: 465px;
+// Минимальные размеры страницы, при которой будет отображаться страница с 2-мя столбиками:
+@min_normal_page_width: calc(@content_block_normal_size * 2 + 30px);
+
+// Переменные для картинки альбома:
+@album_back_width: 153px;
+@album_back_height: 125px;
+@album_back_left_margin: 11px;
+@album_cover_width: 120px;
+@album_cover_height: 120px;
+@album_cover_left_margin: 24px;
+
+
+// Цвета:
+@whitish: #f5f5f5;
+@grayish: #b9b9b9;
+@gray: #3a3a3a;
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Типы контейнеров */
+
+.container{
+  width: 100%;
+
+  &-80{
+    width: 80%;
+    margin: auto;
+  }
+}
+
+.flex{
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+
+  &-row{
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  &-column{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &-center{
+    justify-content: center;
+  }
+
+  &-between{
+    justify-content: space-between;
+  }
+
+  &-evenly{
+    justify-content: space-evenly;
+  }
+
+  &-wrap{
+    flex-wrap: wrap;
+  }
+
+  &-end{
+    align-items: flex-end;
+  }
+}
+
+/* Типы текста */
+
+nav{
+  &>a{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+
+    color: @grayish;
+
+    transition: color 0.5s ease;
+
+    &:hover{
+      color: @whitish;
+    }
+  }
+}
+
+.content-title:hover{
+  color: @whitish;
+}
+
+.title-text{
+  font-family: 'Open Sans', sans-serif;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 22px;
+
+  color: @grayish;
+}
+
+.center-text{
+  text-align: center;
+}
+
+a{
+  text-decoration: none;
+  &:visited{
+    color: @grayish;
+  }
+}
+
+/* Структурные элементы */
+
+main {
+  @media (min-width: @min_normal_page_width){
+    max-width: 95%;
+  }
+  max-width: @min_normal_page_width;
+  margin: 0 auto;
+}
+
+header{
+  width: 100%;
+  background-color: rgba(0,0,0,0.33);
+  border-bottom: solid 1px #000;
+
+  padding-top: 35px;
+  padding-bottom: 27px;
+}
+
+body{
+  background-image: url("../imgs/body-bkg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.text-logo{
+  font-family: 'Bistro Script', sans-serif;
+  font-size: 33px;
+  color: @grayish;
+}
+
+.nav-container{
+  & a{
+    &:not(:first-child){
+      margin-left: 15px;
+    }
+  }
+}
+
+.title-container{
+  align-items: center;
+
+  margin-top: 37px;
+  margin-bottom: 41px;
+}
+
+.social-button{
+  margin: 5px;
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border-radius: 50%;
+
+  &>img{
+    position: relative;
+    left: 35%;
+    top: 25%;
+  }
+}
+
+.content-column{
+  max-width: @content_block_normal_size;
+}
+
+.content-block{
+  &>.content-image{
+    @media (max-width: @content_block_normal_size){
+      width: 100%;
+      height: auto;
+    }
+  }
+  @media (min-width: @content_block_normal_size){
+    width: @content_block_normal_size;
+  }
+
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: rgba(0,0,0,0.4);
+
+  // Элементы блока контента:
+  .content-title{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    color: @grayish;
+    margin-top: 18px;
+    margin-bottom: 21px;
+    padding: 0 20px;
+
+    transition: color 0.5s ease;
+
+    cursor: pointer;
+  }
+
+  .content-text{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: @grayish;
+    margin-bottom: 19px;
+    padding: 0 20px;
+
+    &>p:not(:last-of-type){
+      margin-bottom: 1em;
+    }
+  }
+
+  .content-quote{
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    font-weight: lighter;
+    font-size: 18px;
+    color: @grayish;
+    padding: 0 20px;
+    margin-top: 25px;
+  }
+
+  .content-author{
+    &:before{
+      content: "-";
+      margin-right: 0.5em;
+    }
+
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: #797979;
+    margin-bottom: 25px;
+
+    padding: 0 20px;
+  }
+
+  .content-footer{
+    align-items: center;
+    height: 24px;
+    background: rgba(0,0,0,0.4);
+    padding: 0 20px;
+  }
+
+  .content-date{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10px;
+    color: #797979;
+  }
+
+  .content-likes{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10px;
+    color: #797979;
+  }
+
+  .content-likes::before{
+    content: url("../imgs/content-like.svg");
+    margin-right: 5px;
+  }
+
+  .icon-photo::before{
+    content: url("../imgs/photo-icon.svg");
+    margin-right: 5px;
+  }
+
+  .icon-video::before{
+    content: url("../imgs/video-icon.svg");
+    margin-right: 5px;
+  }
+
+  .icon-article::before{
+    content: url("../imgs/article-icon.svg");
+    margin-right: 5px;
+  }
+
+  .icon-album::before{
+    content: url("../imgs/album-icon.svg");
+    margin-right: 5px;
+  }
+
+  .icon-quote::before{
+    content: url("../imgs/balloon-icon.svg");
+    margin-right: 5px;
+  }
+
+  .icon-forum::before{
+    content: url("../imgs/forum-icon.png");
+    margin-right: 5px;
+  }
+
+  .icon-music::before{
+    content: url("../imgs/note-icon.svg");
+    margin-right: 5px;
+  }
+
+  .icon-author::before{
+    content: url("../imgs/author-icon.svg");
+    margin-right: 5px;
+  }
+
+  .icon-disk::before{
+    content: url("../imgs/disk-icon.svg");
+    margin-right: 5px;
+  }
+}
+
+
+.button-container{
+  margin-top: 30px;
+  margin-bottom: 51px;
+}
+
+.gradient-button{
+  padding: 10px 25px;
+  background: linear-gradient(to top, #000, @gray);
+  border: solid 1px @gray;
+
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  color: @grayish;
+
+  cursor: pointer;
+}
+
+.slim-button{
+  background: transparent;
+  border: solid 1px transparent;
+  text-decoration: underline @grayish;
+
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  color: @grayish;
+
+  cursor: pointer;
+  outline: none;
+}
+
+#print-version-button{
+  margin-right: 15px;
+}
+
+footer{
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.footer-container{
+  @media (min-width: @min_normal_page_width){
+    flex-direction: row;
+    width: 100%;
+    margin: 0 auto;
+  }
+  flex-direction: column;
+  align-items: center;
+
+  &>.container{
+    @media (min-width: @min_normal_page_width){
+      margin: 0 0.5em;
+      width: 100%;
+    }
+    width: 75%;
+  }
+
+  .footer-title{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    color: @grayish;
+    margin-top: 18px;
+    margin-bottom: 21px;
+    padding: 0 20px;
+  }
+
+  .footer-text{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: @grayish;
+    margin-bottom: 19px;
+    padding: 0 20px;
+
+    &>p:not(:last-of-type){
+      margin-bottom: 1em;
+    }
+
+    &:not(:last-of-type){
+      border-bottom: dotted 2px @grayish;
+    }
+  }
+}
+
+.header-container{
+  max-width: 960px;
+  margin: 0 auto;
+
+  align-items: center;
+}
+
+audio{
+  margin: 5px 0;
+}
+
+.music-album-container {
+  position: relative;
+
+  .album-back{
+    position: absolute;
+    top: 20px;
+    left: @album_back_left_margin;
+
+    max-width: @album_back_width;
+    max-height: @album_back_height;
+  }
+
+  .album-cover{
+    position: absolute;
+    top: 20px;
+    left: @album_cover_left_margin;
+
+    max-width: @album_back_width;
+    max-height: @album_back_height;
+  }
+}
+
+.media-flex{
+  // "Две колонки" или расположение элементов в строчку:
+  @media (min-width: @min_normal_page_width) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  // "Одна колонка" или расположение элементов в столбец посередине
+  flex-direction: column;
+  align-items: center;
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="8.844" height="11" viewBox="0 0 8.844 11">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        fill-rule: evenodd;
+        opacity: 0.55;
+      }
+    </style>
+  </defs>
+  <path id="Music_note_copy" data-name="Music note copy" class="cls-1" d="M461.035,1213.57v5.39H459.85a2.053,2.053,0,0,1-1.8,1.05,1.952,1.952,0,1,1,0-3.9,2.048,2.048,0,0,1,1.766.99V1209h1.222v0.14s1.9,4.27,3.5,4.55C465.917,1213.93,461.917,1213.65,461.035,1213.57Z" transform="translate(-456 -1209)"/>
+</svg>
