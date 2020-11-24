@@ -43,40 +43,42 @@
         </div>
         <div class="container-80 flex flex-row flex-center">
             <form class="filter-settings">
-                <fieldset id="post-type">
-                    <legend>Тип поста:</legend>
-                    <span><input name="post-type" id="type-article" type="checkbox" value="article"><label for="type-article">Статья</label></span>
-                    <span><input name="post-type" id="type-photo" type="checkbox" value="photo"><label for="type-photo">Фото</label></span>
-                    <span><input name="post-type" id="type-photo_album" type="checkbox" value="photo_album"><label for="type-photo_album">Фотоальбом</label></span>
-                    <span><input name="post-type" id="type-video" type="checkbox" value="video"><label for="type-video">Видео</label></span>
-                    <span><input name="post-type" id="type-music" type="checkbox" value="music"><label for="type-music">Музыка</label></span>
-                    <span><input name="post-type" id="type-quote" type="checkbox" value="quote"><label for="type-quote">Цитата</label></span>
-                    <span><input name="post-type" id="type-forum" type="checkbox" value="forum"><label for="type-forum">Обсуждение</label></span>
-                </fieldset>
-                <fieldset id="post-likes">
-                    <legend>Количество лайков:</legend>
-                    <span><input name="post-likes" id="likes-more-0" type="radio" value="0"><label for="likes-more-0">Любое</label></span>
-                    <span><input name="post-likes" id="likes-more-10" type="radio" value="10"><label for="likes-more-10">10+</label></span>
-                    <span><input name="post-likes" id="likes-more-50" type="radio" value="50"><label for="likes-more-50">50+</label></span>
-                    <span><input name="post-likes" id="likes-more-100" type="radio" value="100"><label for="likes-more-100">100+</label></span>
-                    <span><input name="post-likes" id="likes-more-500" type="radio" value="500"><label for="likes-more-500">500+</label></span>
-                </fieldset>
-                <fieldset id="post-date">
-                    <legend>Дата размещения поста</legend>
-                    <fieldset>
-                        <legend><input name="post-date" id="date-sooner" type="radio"><label for="date-sooner">Не позднее чем:</label></legend>
-                        <span><input name="post-date-sooner" id="sooner-yesterday" type="radio" value="1"><label for="sooner-yesterday">Вчера</label></span>
-                        <span><input name="post-date-sooner" id="sooner-3days" type="radio" value="3"><label for="sooner-3days">Три дня назад</label></span>
-                        <span><input name="post-date-sooner" id="sooner-7days" type="radio" value="7"><label for="sooner-7days">Неделю назад</label></span>
-                        <span><input name="post-date-sooner" id="sooner-30days" type="radio" value="30"><label for="sooner-30days">Месяц назад</label></span>
+                <fieldset id="fieldset-with-buttons">
+                    <legend><button id="filter-hide">Скрыть</button><button id="filter-reset">Сбросить</button></legend>
+                    <fieldset id="post-type">
+                        <legend>Тип поста:</legend>
+                        <span><input name="post-type" id="type-article" type="checkbox" value="article"><label for="type-article">Статья</label></span>
+                        <span><input name="post-type" id="type-photo" type="checkbox" value="photo"><label for="type-photo">Фото</label></span>
+                        <span><input name="post-type" id="type-photo_album" type="checkbox" value="photo_album"><label for="type-photo_album">Фотоальбом</label></span>
+                        <span><input name="post-type" id="type-video" type="checkbox" value="video"><label for="type-video">Видео</label></span>
+                        <span><input name="post-type" id="type-music" type="checkbox" value="music"><label for="type-music">Музыка</label></span>
+                        <span><input name="post-type" id="type-quote" type="checkbox" value="quote"><label for="type-quote">Цитата</label></span>
+                        <span><input name="post-type" id="type-forum" type="checkbox" value="forum"><label for="type-forum">Обсуждение</label></span>
                     </fieldset>
-                    <fieldset>
-                        <legend><input name="post-date" id="date-from-to" type="radio"><label for="date-from-to">Определённый период:</label></legend>
-                        <span><label for="post-date-from">С:&nbsp;</label><input name="post-date-from-to" id="post-date-from" type="date"></span>
-                        <span><label for="post-date-to">По:&nbsp;</label><input name="post-date-from-to" id="post-date-to" type="date"></span>
+                    <fieldset id="post-likes">
+                        <legend>Количество лайков:</legend>
+                        <span><input name="post-likes" id="likes-more-0" type="radio" value="0"><label for="likes-more-0">Любое</label></span>
+                        <span><input name="post-likes" id="likes-more-10" type="radio" value="10"><label for="likes-more-10">10+</label></span>
+                        <span><input name="post-likes" id="likes-more-50" type="radio" value="50"><label for="likes-more-50">50+</label></span>
+                        <span><input name="post-likes" id="likes-more-100" type="radio" value="100"><label for="likes-more-100">100+</label></span>
+                        <span><input name="post-likes" id="likes-more-500" type="radio" value="500"><label for="likes-more-500">500+</label></span>
+                    </fieldset>
+                    <fieldset id="post-date">
+                        <legend>Дата размещения поста</legend>
+                        <fieldset>
+                            <legend><input name="post-date" id="date-sooner" type="radio"><label for="date-sooner">Не позднее чем:</label></legend>
+                            <span><input name="post-date-sooner" id="sooner-yesterday" type="radio" value="1"><label for="sooner-yesterday">Вчера</label></span>
+                            <span><input name="post-date-sooner" id="sooner-3days" type="radio" value="3"><label for="sooner-3days">Три дня назад</label></span>
+                            <span><input name="post-date-sooner" id="sooner-7days" type="radio" value="7"><label for="sooner-7days">Неделю назад</label></span>
+                            <span><input name="post-date-sooner" id="sooner-30days" type="radio" value="30"><label for="sooner-30days">Месяц назад</label></span>
+                        </fieldset>
+                        <fieldset>
+                            <legend><input name="post-date" id="date-from-to" type="radio"><label for="date-from-to">Определённый период:</label></legend>
+                            <span><label for="post-date-from">С:&nbsp;</label><input name="post-date-from-to" id="post-date-from" type="date"></span>
+                            <span><label for="post-date-to">По:&nbsp;</label><input name="post-date-from-to" id="post-date-to" type="date"></span>
+                        </fieldset>
                     </fieldset>
                 </fieldset>
-                <button id="filter-reset">Сбросить</button>
             </form>
         </div>
         <div id="content-container" class="container flex media-flex flex-wrap flex-evenly">

@@ -117,14 +117,32 @@ body {
   top: 25%;
 }
 .filter-settings {
-  background: #b9b9b9;
+  background: transparent;
+  margin-bottom: 25px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  color: #b9b9b9;
+}
+.filter-settings #fieldset-with-buttons {
   display: flex;
   flex-direction: row;
-  margin-bottom: 25px;
+  padding: 5px 20px;
+}
+.filter-settings #filter-reset,
+.filter-settings #filter-hide {
+  background: transparent;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  border: solid 1px transparent;
+  cursor: pointer;
+  color: #b9b9b9;
+  text-decoration: underline;
 }
 .filter-settings fieldset {
   display: flex;
   flex-direction: column;
+  padding: 5px 5px;
+  border-radius: 5px;
 }
 .filter-settings fieldset:not(:last-child) {
   margin-right: 15px;

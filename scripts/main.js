@@ -214,13 +214,13 @@ function filter_posts(event){
 
   let selected_post_types_array = [];
   let selected_post_types = {
-    article: $("#type-article")[0].checked,
-    photo: $("#type-photo")[0].checked,
-    photo_album: $("#type-photo_album")[0].checked,
-    video: $("#type-video")[0].checked,
-    music: $("#type-music")[0].checked,
-    quote: $("#type-quote")[0].checked,
-    forum: $("#type-forum")[0].checked,
+    article: $("#type-article")[0].checked         , //&& !$("#type-article")[0].disabled,
+    photo: $("#type-photo")[0].checked             , //&& !$("#type-photo")[0].disabled,
+    photo_album: $("#type-photo_album")[0].checked , //&& !$("#type-photo_album")[0].disabled,
+    video: $("#type-video")[0].checked             , //&& !$("#type-video")[0].disabled,
+    music: $("#type-music")[0].checked             , //&& !$("#type-music")[0].disabled,
+    quote: $("#type-quote")[0].checked             , //&& !$("#type-quote")[0].disabled,
+    forum: $("#type-forum")[0].checked             , //&& !$("#type-forum")[0].disabled,
   }
 
   // Составляем массив строк - типов, которые были выбраны.
@@ -402,28 +402,16 @@ function correct_filter_settings(posts,
       // Если блокировать типы можно, то разрещаем и БЛОКИРОВАТЬ и РАЗБЛОКИРОВАТЬ элементы:
       $('#type-'.concat(type[0]))[0].disabled = !type[1];
     }
-
-    // Если объект БЛОКИРУЕТСЯ, то он автоматически становится не выбранным
-    if (!type[1]){
-      $('#type-'.concat(type[0]))[0].checked = false;
-    }
   }
-
   if (block_likes){
     for (radio of $('input[name="post-likes"]')){
       radio.disabled = radio.value > max_likes_avaliable_post;
-      if (radio.disabled){
-        radio.checked = false;
-      }
     }
   }
   if (block_dates){
     for (radio of $('input[name="post-date-sooner"]')){
       let radio_date = new Date(Date.now() - parseInt(radio.value) * (24*60*60*1000));
       radio.disabled = radio_date > latest_avaliable_post;
-      if (radio.disabled){
-        radio.checked = false;
-      }
     }
   }
 
@@ -448,6 +436,8 @@ $(document).ready( () => {
     }
     e.preventDefault();
   });
+
+  $("#filter-hide").on("click", (e) => {e.preventDefault()})
 
   // Устанавливаем настройки фильтра постов:
   correct_filter_settings(posts);

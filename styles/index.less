@@ -175,16 +175,41 @@ body{
 }
 
 .filter-settings{
-  background: @grayish;
-
-  display: flex;
-  flex-direction: row;
+  background: transparent;
 
   margin-bottom: 25px;
+
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  color: @grayish;
+
+  #fieldset-with-buttons{
+    display: flex;
+    flex-direction: row;
+    padding: 5px 20px;
+  }
+
+  #filter-reset,
+  #filter-hide{
+    background: transparent;
+
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    border: solid 1px transparent;
+
+    cursor: pointer;
+
+    color: @grayish;
+    text-decoration: underline;
+  }
 
   fieldset{
     display: flex;
     flex-direction: column;
+
+    padding: 5px 5px;
+
+    border-radius: 5px;
 
     &:not(:last-child){
       margin-right: 15px;
