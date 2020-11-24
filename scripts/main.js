@@ -180,6 +180,7 @@ function construct_post(post_data){
 function show_all_posts(posts){
   // Очищаем уже загруженные посты:
   clear_posts();
+
   const content_container = $('#content-container');
   // Конструируем посты для каждого элемента переданного массива
   posts.map(value => {
@@ -288,6 +289,8 @@ function filter_posts(event){
   // Если оказалось, что не выбрана ни одна из настроек фильтра, возвращаем все посты на место:
   if (!(any_post_date_selected || any_post_type_selected || selected_post_likes !== null)){
     show_all_posts(posts);
+    // Устанавливаем настройки фильтра постов:
+    correct_filter_settings(posts);
   }
   else{
     // Если была выбрана хотя бы одна из настроек фильтра:
@@ -321,9 +324,72 @@ function filter_posts(event){
     })
 
     show_all_posts(new_posts);
+    correct_filter_settings(new_posts);
   }
 
   // event.preventDefault();
+}
+
+// Проходится по массиву posts, делая неактивными те настройки фильтров,
+// которые будут давать пустые резуьтаты.
+// При установки одного из флагов block_... в false соседние флаги
+// этого типа не будут блокироваться (полезно при подборе необходимого
+// флиьтра при использовании сайта).
+function correct_filter_settings(posts,
+                                 block_types = true,
+                                 block_likes = true,
+                                 block_dates = true){
+  // Доступные типы постов:
+  let avaliable_post_types = {
+    article:      false,
+    photo:        false,
+    photo_album:  false,
+    video:        false,
+    music:        false,
+    quote:        false,
+    forum:        false,
+  }
+  // Минимальное количество лайков на постах:
+  let max_likes_avaliable_post = null;
+  // Самая поздняя дата поста:
+  let latest_avaliable_post = null;
+
+  posts.map( post => {
+    // Тип поста:
+    avaliable_post_types[post.type] = true;
+    // Количество лайков:
+    if (max_likes_avaliable_post === null || post.likes > max_likes_avaliable_post){
+      max_likes_avaliable_post = post.likes;
+    }
+    // Дата поста:
+    if (latest_avaliable_post === null || post.date > latest_avaliable_post){
+      latest_avaliable_post = post.date;
+    }
+  });
+
+  if (block_types){
+    // $('#type-article')[0].disabled = !avaliable_post_types.article;
+    // Проходимся по всем ключам avaliable_post_types и меняем соответствующие
+    // типу поста input-ы.
+    // type[0] - название типа (article, photo ...)
+    // type[1] - наличие такого типа (true или false)
+    for (type of Object.entries(avaliable_post_types)){
+      $('#type-'.concat(type[0]))[0].disabled = !type[1];
+    }
+  }
+  if (block_likes){
+    for (radio of $('input[name="post-likes"]')){
+      radio.disabled = radio.value > max_likes_avaliable_post;
+    }
+  }
+  if (block_dates){
+    for (radio of $('input[name="post-date-sooner"]')){
+      let radio_date = new Date(Date.now() - parseInt(radio.value) * (24*60*60*1000));
+      radio.disabled = radio_date > latest_avaliable_post;
+    }
+  }
+
+  console.log('okay');
 }
 
 // Выполняется при полной загрузке страницы
@@ -332,9 +398,11 @@ $(document).ready( () => {
   $('input[name="post-date-sooner"]').on("click", () => {$('#date-sooner')[0].checked = true;});
 
   $('input[name="post-date-from-to"]').on("click", () => {$('#date-from-to')[0].checked = true;});
-  $('.filter-settings input').on("click", filter_posts);
+  $('.filter-settings input').not('input[type="button"]').on("click", filter_posts);
 
   $("#filter-reset").on("click", (e) => {
+    // Устанавливаем настройки фильтра постов:
+    correct_filter_settings(posts);
     show_all_posts(posts);
     // Сброс флажков всех input-ов:
     for(inp of $('.filter-settings input')){
@@ -343,6 +411,8 @@ $(document).ready( () => {
     e.preventDefault();
   });
 
+  // Устанавливаем настройки фильтра постов:
+  correct_filter_settings(posts);
   show_all_posts(posts);
 })
 
