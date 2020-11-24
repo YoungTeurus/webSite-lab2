@@ -249,7 +249,6 @@ function filter_posts(event){
   // Если выбран тип "Не позднее":
   let date_sooner = $("#date-sooner");
   let date_from_to = $("#date-from-to");
-  // if ($("#date-sooner")[0].checked)
   if (date_sooner.length !== 0 ? date_sooner[0].checked : false){
     // Насколько старым может быть пост для отображения:
     let num_of_days = $('input[name="post-date-sooner"]:checked').val() || null;
@@ -263,7 +262,6 @@ function filter_posts(event){
     }
   }
   // Если выбран тип "С ... по":
-  // else if ($("#date-from-to")[0].checked){
   else if (date_from_to.length !== 0 ? date_from_to[0].checked : false){
     let string_date_from = $('#post-date-from').val(),
         string_date_to = $('#post-date-to').val();
@@ -286,8 +284,6 @@ function filter_posts(event){
     any_post_date_selected = false;
   }
 
-  // console.log("Распарсинг настроек фильтра прошёл успешно!");
-
   // Если оказалось, что не выбрана ни одна из настроек фильтра, возвращаем все посты на место:
   if (!(any_post_date_selected || any_post_type_selected || selected_post_likes !== null)){
     show_all_posts(posts);
@@ -297,7 +293,88 @@ function filter_posts(event){
   else{
     // Если была выбрана хотя бы одна из настроек фильтра:
     // Создаём массив новых постов:
+
     let new_posts = posts.filter(post =>{
+      if (any_post_type_selected){
+        // Если тип поста не был выбран, не добавляем его в массив
+        if (!selected_post_types_array.includes(post.type)){
+          return false;
+        }
+      }
+      if (selected_post_likes !== null){
+        // Если у поста меньше лайков, чем было выбрано
+        if (post.likes < selected_post_likes){
+          return false;
+        }
+      }
+      if (any_post_date_selected){
+        if (date_from !== null){
+          if (post.date < date_from){
+            return false;
+          }
+        }
+        if (date_to !== null){
+          if (post.date > date_to){
+            return false;
+          }
+        }
+      }
+
+      // switch (clicked_input_name) {
+      //   case "post-type":
+      //   if (any_post_type_selected){
+      //     // Если тип поста не был выбран, не добавляем его в массив
+      //     if (!selected_post_types_array.includes(post.type)){
+      //       return false;
+      //     }
+      //   }
+      //     break;
+      //   case "post-likes":
+      //   if (selected_post_likes !== null){
+      //     // Если у поста меньше лайков, чем было выбрано
+      //     if (post.likes < selected_post_likes){
+      //       return false;
+      //     }
+      //   }
+      //     break;
+      //   case "post-date-sooner":
+      //   case "post-date-from-to":
+      //   if (any_post_date_selected){
+      //     if (date_from !== null){
+      //       if (post.date < date_from){
+      //         return false;
+      //       }
+      //     }
+      //     if (date_to !== null){
+      //       if (post.date > date_to){
+      //         return false;
+      //       }
+      //     }
+      //   }
+      //     break;
+      // }
+      return true;
+    })
+//
+    let block_types = true,
+        block_likes = true,
+        block_dates = true;
+    switch (clicked_input_name) {
+        case "post-type":
+        block_types = false;
+        break;
+      case "post-likes":
+        block_likes = false;
+        break;
+      case "post-date-sooner":
+      case "post-date-from-to":
+        block_dates = false;
+        break;
+    }
+
+    correct_filter_settings(new_posts, block_types, block_likes, block_dates);
+
+    new_posts = new_posts.filter(post =>{
       if (any_post_type_selected){
         // Если тип поста не был выбран, не добавляем его в массив
         if (!selected_post_types_array.includes(post.type)){
@@ -325,109 +402,7 @@ function filter_posts(event){
       return true;
     })
 
-    let block_types = true,
-        block_likes = true,
-        block_dates = true;
-    switch (clicked_input_name) {
-      case "post-type":
-        block_types = false;
-        break;
-      case "post-likes":
-        block_likes = false;
-        break;
-      case "post-date-sooner":
-      case "post-date-from-to":
-        block_dates = false;
-        break;
-    }
-
-    correct_filter_settings(new_posts, block_types, block_likes, block_dates);
     show_all_posts(new_posts);
-
-    // let new_posts = posts.filter(post =>{
-    //   switch (clicked_input_name) {
-    //     case "post-type":
-    //     if (any_post_type_selected){
-    //       // Если тип поста не был выбран, не добавляем его в массив
-    //       if (!selected_post_types_array.includes(post.type)){
-    //         return false;
-    //       }
-    //     }
-    //       break;
-    //     case "post-likes":
-    //     if (selected_post_likes !== null){
-    //       // Если у поста меньше лайков, чем было выбрано
-    //       if (post.likes < selected_post_likes){
-    //         return false;
-    //       }
-    //     }
-    //       break;
-    //     case "post-date-sooner":
-    //     case "post-date-from-to":
-    //     if (any_post_date_selected){
-    //       if (date_from !== null){
-    //         if (post.date < date_from){
-    //           return false;
-    //         }
-    //       }
-    //       if (date_to !== null){
-    //         if (post.date > date_to){
-    //           return false;
-    //         }
-    //       }
-    //     }
-    //       break;
-    //   }
-    //   return true;
-    // })
-//
-    // let block_types = true,
-    //     block_likes = true,
-    //     block_dates = true;
-    // switch (clicked_input_name) {
-    //     case "post-type":
-    //     block_types = false;
-    //     break;
-    //   case "post-likes":
-    //     block_likes = false;
-    //     break;
-    //   case "post-date-sooner":
-    //   case "post-date-from-to":
-    //     block_dates = false;
-    //     break;
-    // }
-//
-    // correct_filter_settings(new_posts, block_types, block_likes, block_dates);
-//
-    // new_posts = new_posts.filter(post =>{
-    //   if (any_post_type_selected){
-    //     // Если тип поста не был выбран, не добавляем его в массив
-    //     if (!selected_post_types_array.includes(post.type)){
-    //       return false;
-    //     }
-    //   }
-    //   if (selected_post_likes !== null){
-    //     // Если у поста меньше лайков, чем было выбрано
-    //     if (post.likes < selected_post_likes){
-    //       return false;
-    //     }
-    //   }
-    //   if (any_post_date_selected){
-    //     if (date_from !== null){
-    //       if (post.date < date_from){
-    //         return false;
-    //       }
-    //     }
-    //     if (date_to !== null){
-    //       if (post.date > date_to){
-    //         return false;
-    //       }
-    //     }
-    //   }
-    //   return true;
-    // })
-//
-    // show_all_posts(new_posts);
 
   }
 
@@ -471,25 +446,44 @@ function correct_filter_settings(posts,
     }
   });
 
-  if (block_types){
-    // $('#type-article')[0].disabled = !avaliable_post_types.article;
-    // Проходимся по всем ключам avaliable_post_types и меняем соответствующие
-    // типу поста input-ы.
-    // type[0] - название типа (article, photo ...)
-    // type[1] - наличие такого типа (true или false)
-    for (type of Object.entries(avaliable_post_types)){
+  // Проходимся по всем ключам avaliable_post_types и меняем соответствующие
+  // типу поста input-ы.
+  // type[0] - название типа (article, photo ...)
+  // type[1] - наличие такого типа (true или false)
+  for (type of Object.entries(avaliable_post_types)){
+    if (!block_types){
+      // Если нельзя блокировать типы, то разрешаем только РАЗБЛОКИРОВАТЬ элементы:
+      // РАЗБЛОКИРУЕТСЯ, если type[1] = true
+      if (type[1]){
+        $('#type-'.concat(type[0]))[0].disabled = !type[1];
+      }
+    }
+    else{
+      // Если блокировать типы можно, то разрещаем и БЛОКИРОВАТЬ и РАЗБЛОКИРОВАТЬ элементы:
       $('#type-'.concat(type[0]))[0].disabled = !type[1];
     }
+
+    // Если объект БЛОКИРУЕТСЯ, то он автоматически становится не выбранным
+    if (!type[1]){
+      $('#type-'.concat(type[0]))[0].checked = false;
+    }
   }
+
   if (block_likes){
     for (radio of $('input[name="post-likes"]')){
       radio.disabled = radio.value > max_likes_avaliable_post;
+      if (radio.disabled){
+        radio.checked = false;
+      }
     }
   }
   if (block_dates){
     for (radio of $('input[name="post-date-sooner"]')){
       let radio_date = new Date(Date.now() - parseInt(radio.value) * (24*60*60*1000));
       radio.disabled = radio_date > latest_avaliable_post;
+      if (radio.disabled){
+        radio.checked = false;
+      }
     }
   }
 

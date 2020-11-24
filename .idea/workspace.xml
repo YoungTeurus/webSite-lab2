@@ -22,13 +22,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49f7270e-48df-426c-a402-4f18e154ef91" name="Default Changelist" comment="Работающий &quot;умный&quot; фильтр.">
+    <list default="true" id="49f7270e-48df-426c-a402-4f18e154ef91" name="Default Changelist" comment="Умный фильтр с &quot;неумной&quot; блокировкой (при выборе расширяющего параметра остальные параметры не расширяются).">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/print.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/print.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/print.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/styles/print.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/print.less" beforeDir="false" afterPath="$PROJECT_DIR$/styles/print.less" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +80,7 @@
       <updated>1606081704351</updated>
       <workItem from="1606081705377" duration="33742000" />
       <workItem from="1606168722716" duration="1099000" />
-      <workItem from="1606198062745" duration="7166000" />
+      <workItem from="1606198062745" duration="9700000" />
     </task>
     <task id="LOCAL-00001" summary="Рабочая динамическая загрузка содержимого страницы.">
       <created>1606153969649</created>
@@ -128,7 +124,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606201287371</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Умный фильтр с &quot;неумной&quot; блокировкой (при выборе расширяющего параметра остальные параметры не расширяются).">
+      <created>1606209513501</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1606209513501</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,7 +156,8 @@
     <MESSAGE value="Простая сортировка постов." />
     <MESSAGE value="Кнопка сброса сбрасывает все checked у input-ов." />
     <MESSAGE value="Работающий &quot;умный&quot; фильтр." />
-    <option name="LAST_COMMIT_MESSAGE" value="Работающий &quot;умный&quot; фильтр." />
+    <MESSAGE value="Умный фильтр с &quot;неумной&quot; блокировкой (при выборе расширяющего параметра остальные параметры не расширяются)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Умный фильтр с &quot;неумной&quot; блокировкой (при выборе расширяющего параметра остальные параметры не расширяются)." />
   </component>
   <component name="WindowStateProjectService">
     <state x="531" y="285" key="#Configure_Path_Variables" timestamp="1606168746413">
