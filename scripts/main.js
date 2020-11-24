@@ -188,7 +188,6 @@ function show_all_posts(posts){
     if (temp_post != null)
       temp_post.appendTo(content_container[0]);
   });
-  // $('<br>').appendTo($('#older-posts-button'));
 }
 
 // Переключает отображение страницы между обычным стилем и стилем для печати
@@ -209,7 +208,10 @@ function switch_print_version(){
   window.scrollTo(0,0);
 }
 
+// Фильтрует посты по параметрам, установленным в input-ах
 function filter_posts(event){
+  let clicked_input_name = event.currentTarget.name;
+
   let selected_post_types_array = [];
   let selected_post_types = {
     article: $("#type-article")[0].checked,
@@ -323,8 +325,110 @@ function filter_posts(event){
       return true;
     })
 
+    let block_types = true,
+        block_likes = true,
+        block_dates = true;
+    switch (clicked_input_name) {
+      case "post-type":
+        block_types = false;
+        break;
+      case "post-likes":
+        block_likes = false;
+        break;
+      case "post-date-sooner":
+      case "post-date-from-to":
+        block_dates = false;
+        break;
+    }
+
+    correct_filter_settings(new_posts, block_types, block_likes, block_dates);
     show_all_posts(new_posts);
-    correct_filter_settings(new_posts);
+
+    // let new_posts = posts.filter(post =>{
+    //   switch (clicked_input_name) {
+    //     case "post-type":
+    //     if (any_post_type_selected){
+    //       // Если тип поста не был выбран, не добавляем его в массив
+    //       if (!selected_post_types_array.includes(post.type)){
+    //         return false;
+    //       }
+    //     }
+    //       break;
+    //     case "post-likes":
+    //     if (selected_post_likes !== null){
+    //       // Если у поста меньше лайков, чем было выбрано
+    //       if (post.likes < selected_post_likes){
+    //         return false;
+    //       }
+    //     }
+    //       break;
+    //     case "post-date-sooner":
+    //     case "post-date-from-to":
+    //     if (any_post_date_selected){
+    //       if (date_from !== null){
+    //         if (post.date < date_from){
+    //           return false;
+    //         }
+    //       }
+    //       if (date_to !== null){
+    //         if (post.date > date_to){
+    //           return false;
+    //         }
+    //       }
+    //     }
+    //       break;
+    //   }
+    //   return true;
+    // })
+//
+    // let block_types = true,
+    //     block_likes = true,
+    //     block_dates = true;
+    // switch (clicked_input_name) {
+    //     case "post-type":
+    //     block_types = false;
+    //     break;
+    //   case "post-likes":
+    //     block_likes = false;
+    //     break;
+    //   case "post-date-sooner":
+    //   case "post-date-from-to":
+    //     block_dates = false;
+    //     break;
+    // }
+//
+    // correct_filter_settings(new_posts, block_types, block_likes, block_dates);
+//
+    // new_posts = new_posts.filter(post =>{
+    //   if (any_post_type_selected){
+    //     // Если тип поста не был выбран, не добавляем его в массив
+    //     if (!selected_post_types_array.includes(post.type)){
+    //       return false;
+    //     }
+    //   }
+    //   if (selected_post_likes !== null){
+    //     // Если у поста меньше лайков, чем было выбрано
+    //     if (post.likes < selected_post_likes){
+    //       return false;
+    //     }
+    //   }
+    //   if (any_post_date_selected){
+    //     if (date_from !== null){
+    //       if (post.date < date_from){
+    //         return false;
+    //       }
+    //     }
+    //     if (date_to !== null){
+    //       if (post.date > date_to){
+    //         return false;
+    //       }
+    //     }
+    //   }
+    //   return true;
+    // })
+//
+    // show_all_posts(new_posts);
+
   }
 
   // event.preventDefault();
@@ -389,7 +493,7 @@ function correct_filter_settings(posts,
     }
   }
 
-  console.log('okay');
+  // console.log('okay');
 }
 
 // Выполняется при полной загрузке страницы
