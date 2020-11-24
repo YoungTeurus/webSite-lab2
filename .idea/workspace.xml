@@ -3,18 +3,28 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="49f7270e-48df-426c-a402-4f18e154ef91" name="Default Changelist" comment="Мелкие доработки.">
+    <list default="true" id="49f7270e-48df-426c-a402-4f18e154ef91" name="Default Changelist" comment="Простая сортировка постов.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/less.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/index.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/styles/index.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/styles/index.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/print.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/print.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/print.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/styles/print.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/print.less" beforeDir="false" afterPath="$PROJECT_DIR$/styles/print.less" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +79,8 @@
       <option name="presentableId" value="Default" />
       <updated>1606081704351</updated>
       <workItem from="1606081705377" duration="33742000" />
-      <workItem from="1606168722716" duration="1065000" />
+      <workItem from="1606168722716" duration="1099000" />
+      <workItem from="1606198062745" duration="321000" />
     </task>
     <task id="LOCAL-00001" summary="Рабочая динамическая загрузка содержимого страницы.">
       <created>1606153969649</created>
@@ -92,17 +103,37 @@
       <option name="project" value="LOCAL" />
       <updated>1606157962034</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Простая сортировка постов.">
+      <created>1606169877379</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1606169877379</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Рабочая динамическая загрузка содержимого страницы." />
     <MESSAGE value="Переделка на 1 столбец." />
     <MESSAGE value="Мелкие доработки." />
-    <option name="LAST_COMMIT_MESSAGE" value="Мелкие доработки." />
+    <MESSAGE value="Простая сортировка постов." />
+    <option name="LAST_COMMIT_MESSAGE" value="Простая сортировка постов." />
   </component>
   <component name="WindowStateProjectService">
     <state x="531" y="285" key="#Configure_Path_Variables" timestamp="1606168746413">
@@ -193,10 +224,10 @@
       <screen x="0" y="0" width="1460" height="864" />
     </state>
     <state x="14" y="67" key="SettingsEditor/0.0.1460.864@0.0.1460.864" timestamp="1606152470147" />
-    <state x="323" y="165" key="Vcs.Push.Dialog.v2" timestamp="1606157967527">
+    <state x="323" y="165" key="Vcs.Push.Dialog.v2" timestamp="1606169879864">
       <screen x="0" y="0" width="1460" height="864" />
     </state>
-    <state x="323" y="165" key="Vcs.Push.Dialog.v2/0.0.1460.864@0.0.1460.864" timestamp="1606157967527" />
+    <state x="323" y="165" key="Vcs.Push.Dialog.v2/0.0.1460.864@0.0.1460.864" timestamp="1606169879864" />
     <state x="387" y="197" key="run.anything.popup" timestamp="1606153602238">
       <screen x="0" y="0" width="1460" height="864" />
     </state>

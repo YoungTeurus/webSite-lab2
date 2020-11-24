@@ -334,7 +334,14 @@ $(document).ready( () => {
   $('input[name="post-date-from-to"]').on("click", () => {$('#date-from-to')[0].checked = true;});
   $('.filter-settings input').on("click", filter_posts);
 
-  $("#filter-reset").on("click", (e) => {show_all_posts(posts); e.preventDefault();});
+  $("#filter-reset").on("click", (e) => {
+    show_all_posts(posts);
+    // Сброс флажков всех input-ов:
+    for(inp of $('.filter-settings input')){
+      if (inp.checked !== undefined) inp.checked = false;
+    }
+    e.preventDefault();
+  });
 
   show_all_posts(posts);
 })
