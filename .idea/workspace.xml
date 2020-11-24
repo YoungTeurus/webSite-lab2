@@ -22,7 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49f7270e-48df-426c-a402-4f18e154ef91" name="Default Changelist" comment="Умный фильтр с &quot;неумной&quot; блокировкой (при выборе расширяющего параметра остальные параметры не расширяются).">
+    <list default="true" id="49f7270e-48df-426c-a402-4f18e154ef91" name="Default Changelist" comment="Костыльный метод &quot;расширения&quot; фильтра.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/main.js" afterDir="false" />
     </list>
@@ -80,7 +80,7 @@
       <updated>1606081704351</updated>
       <workItem from="1606081705377" duration="33742000" />
       <workItem from="1606168722716" duration="1099000" />
-      <workItem from="1606198062745" duration="9700000" />
+      <workItem from="1606198062745" duration="9963000" />
     </task>
     <task id="LOCAL-00001" summary="Рабочая динамическая загрузка содержимого страницы.">
       <created>1606153969649</created>
@@ -131,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606209513501</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Костыльный метод &quot;расширения&quot; фильтра.">
+      <created>1606212035160</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1606212035160</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,7 +164,8 @@
     <MESSAGE value="Кнопка сброса сбрасывает все checked у input-ов." />
     <MESSAGE value="Работающий &quot;умный&quot; фильтр." />
     <MESSAGE value="Умный фильтр с &quot;неумной&quot; блокировкой (при выборе расширяющего параметра остальные параметры не расширяются)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Умный фильтр с &quot;неумной&quot; блокировкой (при выборе расширяющего параметра остальные параметры не расширяются)." />
+    <MESSAGE value="Костыльный метод &quot;расширения&quot; фильтра." />
+    <option name="LAST_COMMIT_MESSAGE" value="Костыльный метод &quot;расширения&quot; фильтра." />
   </component>
   <component name="WindowStateProjectService">
     <state x="531" y="285" key="#Configure_Path_Variables" timestamp="1606168746413">

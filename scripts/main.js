@@ -292,8 +292,7 @@ function filter_posts(event){
   }
   else{
     // Если была выбрана хотя бы одна из настроек фильтра:
-    // Создаём массив новых постов:
-
+    // Создаём массив новых постов, фильтруя исходный массив:
     let new_posts = posts.filter(post =>{
       if (any_post_type_selected){
         // Если тип поста не был выбран, не добавляем его в массив
@@ -319,43 +318,10 @@ function filter_posts(event){
           }
         }
       }
-
-      // switch (clicked_input_name) {
-      //   case "post-type":
-      //   if (any_post_type_selected){
-      //     // Если тип поста не был выбран, не добавляем его в массив
-      //     if (!selected_post_types_array.includes(post.type)){
-      //       return false;
-      //     }
-      //   }
-      //     break;
-      //   case "post-likes":
-      //   if (selected_post_likes !== null){
-      //     // Если у поста меньше лайков, чем было выбрано
-      //     if (post.likes < selected_post_likes){
-      //       return false;
-      //     }
-      //   }
-      //     break;
-      //   case "post-date-sooner":
-      //   case "post-date-from-to":
-      //   if (any_post_date_selected){
-      //     if (date_from !== null){
-      //       if (post.date < date_from){
-      //         return false;
-      //       }
-      //     }
-      //     if (date_to !== null){
-      //       if (post.date > date_to){
-      //         return false;
-      //       }
-      //     }
-      //   }
-      //     break;
-      // }
       return true;
     })
-//
+
+    // Определяем, нужно ли блокировать изменение каких-либо элементов фильтра
     let block_types = true,
         block_likes = true,
         block_dates = true;
@@ -372,36 +338,10 @@ function filter_posts(event){
         break;
     }
 
+    // Сперва корректируем настройки фильтров:
     correct_filter_settings(new_posts, block_types, block_likes, block_dates);
 
-    new_posts = new_posts.filter(post =>{
-      if (any_post_type_selected){
-        // Если тип поста не был выбран, не добавляем его в массив
-        if (!selected_post_types_array.includes(post.type)){
-          return false;
-        }
-      }
-      if (selected_post_likes !== null){
-        // Если у поста меньше лайков, чем было выбрано
-        if (post.likes < selected_post_likes){
-          return false;
-        }
-      }
-      if (any_post_date_selected){
-        if (date_from !== null){
-          if (post.date < date_from){
-            return false;
-          }
-        }
-        if (date_to !== null){
-          if (post.date > date_to){
-            return false;
-          }
-        }
-      }
-      return true;
-    })
-
+    // Затем показываем оставшиеся посты
     show_all_posts(new_posts);
 
   }
