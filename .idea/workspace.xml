@@ -22,9 +22,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49f7270e-48df-426c-a402-4f18e154ef91" name="Default Changelist" comment="Комментарии к коду.">
+    <list default="true" id="49f7270e-48df-426c-a402-4f18e154ef91" name="Default Changelist" comment="Сданная лабораторная. Проблемы: не динамиечкие характеристики товара.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/index.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/styles/index.css.map" afterDir="false" />
@@ -84,7 +83,9 @@
       <updated>1606081704351</updated>
       <workItem from="1606081705377" duration="33742000" />
       <workItem from="1606168722716" duration="1099000" />
-      <workItem from="1606198062745" duration="13775000" />
+      <workItem from="1606198062745" duration="13863000" />
+      <workItem from="1606231995681" duration="883000" />
+      <workItem from="1606752597907" duration="162000" />
     </task>
     <task id="LOCAL-00001" summary="Рабочая динамическая загрузка содержимого страницы.">
       <created>1606153969649</created>
@@ -149,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606212342494</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Сданная лабораторная. Проблемы: не динамиечкие характеристики товара.">
+      <created>1606216583415</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1606216583415</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,7 +185,8 @@
     <MESSAGE value="Умный фильтр с &quot;неумной&quot; блокировкой (при выборе расширяющего параметра остальные параметры не расширяются)." />
     <MESSAGE value="Костыльный метод &quot;расширения&quot; фильтра." />
     <MESSAGE value="Комментарии к коду." />
-    <option name="LAST_COMMIT_MESSAGE" value="Комментарии к коду." />
+    <MESSAGE value="Сданная лабораторная. Проблемы: не динамиечкие характеристики товара." />
+    <option name="LAST_COMMIT_MESSAGE" value="Сданная лабораторная. Проблемы: не динамиечкие характеристики товара." />
   </component>
   <component name="WindowStateProjectService">
     <state x="531" y="285" key="#Configure_Path_Variables" timestamp="1606168746413">

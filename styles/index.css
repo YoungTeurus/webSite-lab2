@@ -123,6 +123,22 @@ body {
   font-size: 13px;
   color: #b9b9b9;
 }
+.filter-settings fieldset {
+  height: 100%;
+  -webkit-transition: height, 0.5s linear;
+  -moz-transition: height, 0.5s linear;
+  -ms-transition: height, 0.5s linear;
+  -o-transition: height, 0.5s linear;
+  transition: height, 0.5s linear;
+}
+.filter-settings .fieldset-hidden {
+  height: 0;
+  -webkit-transition: height, 0.5s linear;
+  -moz-transition: height, 0.5s linear;
+  -ms-transition: height, 0.5s linear;
+  -o-transition: height, 0.5s linear;
+  transition: height, 0.5s linear;
+}
 .filter-settings #fieldset-with-buttons {
   display: flex;
   flex-direction: row;

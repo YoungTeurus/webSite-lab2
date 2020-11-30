@@ -183,6 +183,24 @@ body{
   font-size: 13px;
   color: @grayish;
 
+  fieldset{
+    height: 100%;
+    -webkit-transition:height, 0.5s linear;
+    -moz-transition: height, 0.5s linear;
+    -ms-transition: height, 0.5s linear;
+    -o-transition: height, 0.5s linear;
+    transition: height, 0.5s linear;
+  }
+
+  .fieldset-hidden{
+    height: 0;
+    -webkit-transition:height, 0.5s linear;
+    -moz-transition: height, 0.5s linear;
+    -ms-transition: height, 0.5s linear;
+    -o-transition: height, 0.5s linear;
+    transition: height, 0.5s linear;
+  }
+
   #fieldset-with-buttons{
     display: flex;
     flex-direction: row;

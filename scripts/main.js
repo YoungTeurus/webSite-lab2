@@ -437,7 +437,10 @@ $(document).ready( () => {
     e.preventDefault();
   });
 
-  $("#filter-hide").on("click", (e) => {e.preventDefault()})
+  $("#filter-hide").on("click", (e) => {
+    $("#fieldset-with-buttons fieldset").toggleClass("fieldset-hidden");
+    e.preventDefault();
+  })
 
   // Устанавливаем настройки фильтра постов:
   correct_filter_settings(posts);
