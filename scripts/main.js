@@ -1,21 +1,65 @@
 let print_version_on = false;
 
 const path_to_album_back_image = "imgs/album-back.png";
+// Типы постов:
 const post_types = {
-  article: "article",
-  photo: "photo",
-  photo_album: "photo_album",
-  video: "video",
-  music: "music",
-  quote: "quote",
-  forum: "forum"
+  article:     {value: 'article', name: "Статья"},
+  photo:       {value: 'photo', name: "Фото"},
+  photo_album: {value: 'photo_album', name: "Фотоальбом"},
+  video:       {value: 'video', name: "Видео"},
+  music:       {value: 'music', name: "Музыка"},
+  quote:       {value: 'quote', name: "Цитата"},
+  forum:       {value: 'forum', name: "Обсуждение"},
+}
+// Типы сравнений (для использования в filtersTypes.range):
+const compareTypes = {
+  greater:      (value, filter) => value > filter,    // Больше
+  greaterEqual: (value, filter) => value >= filter,   // Больше, либо равно
+  smaller:      (value, filter) => value < filter,    // Меньше
+  smallerEqual: (value, filter) => value <= filter,   // Меньше, либо равно
+  equal:        (value, filter) => value === filter,  // Равно
+  notEqual:     (value, filter) => value !== filter,  // Не равно
+}
+// Типы input-ов (для использования в filtersTypes.userInputRange):
+const inputTypes = {
+  text: 'text',     // Простое текстовое поле
+  date: 'date',     // Выбор даты
+}
+// Типы фильтров:
+const filtersTypes = {
+  // Любой фильтр должен обладать следующими полями:
+  // name - Название фильтра (используется при генерации элементов)
+  // title - Человеко-читаемое название фильтра
+  // filterType - Тип фильтра (один из перечисленных в filtersTypes)
+
+  // Тип фильтра, который подгружает все возможные значения определённого атрибута объекта
+  // и создаёт группу checkbox-ов с их перечислением.
+  // Данный фильтр использует поля:
+  // attribute - Атрибут объекта, который испольуется для фильтрации
+  // attributeNames - Объект, который имеет поля с человеко-читаемыми названиями атрибутов
+  attributeList: 'attributeList',
+  // TODO: придумать нормальное описание данного фильтра:
+  // Тип фильтра, который определяет группу checkbox-ов с предустановленными значениями,
+  // типа: 10+, 20+ и т.д.
+  // Данный фильтр использует поля:
+  // attribute - Атрибут объекта, который испольуется для фильтрации
+  // compareType - Способ сравнения атрибута объекта с значениями в ranges
+  //  Выбирается из атрибутов объекта compareTypes.
+  // ranges - Массив значений, с которыми будет сравниваться значение определённого артрибута объекта
+  // rangesNames - (необязательно) Человеко-читаемое название каждого элемента ranges
+  range: 'range',
+  // Тип фильтра, который использует text или dateTime input для сравнения определённого атрибута.
+  // Данный фильтр использует поля:
+  // inputType - Вид input-ов, используемых для сравнения определённого атрибута
+  //  Выбирается из атрибутов объекта userInputs
+  userInputRange: 'userInputRange',
 }
 
 // Массив данных постов:
 let posts = [
   {
     id: 1,
-    type: post_types.photo,
+    type: post_types.photo.value,
     title: "Aenean Malesuada Consectetur Risus",
     text: "Donec id elit non mi porta gravida at eget metus. Praesent commodo cursus magna, vel scelerisque nisl consectetur mollis ornare vel leo.",
     photo_src: "imgs/content-img-1.png",
@@ -24,7 +68,7 @@ let posts = [
   },
   {
     id: 2,
-    type: post_types.video,
+    type: post_types.video.value,
     title: "Ullamcorper Ipsum Parturient Cursus Etiam",
     text: "Nulla vitae elit libero, a pharetra augue aenean leo quam. Pellentesque ornare sem lacinia quam venenatis Nulla vitae elit libero, a pharetra augue aenean leo quam. Pellentesque ornare sem lacinia quam venenatis Nulla vitae elit libero, a pharetra augue aenean leo quam. Pellentesque ornare sem lacinia quam venenatis Nulla vitae elit libero, a pharetra augue aenean leo quam. Pellentesque ornare sem lacinia quam venenatis Nulla vitae elit libero, a pharetra augue aenean leo quam. Pellentesque ornare sem lacinia quam venenatis Nulla vitae elit libero, a pharetra augue aenean leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.",
     video_src: "imgs/content-img-3.png",
@@ -33,7 +77,7 @@ let posts = [
   },
   {
     id: 3,
-    type: post_types.music,
+    type: post_types.music.value,
     title: "Vehicula Commodo Vestibulum Sit",
     text: "Pellentesque ornare lacinia quam venenatis vestibulum.",
     music_src: "#",
@@ -46,7 +90,7 @@ let posts = [
   },
   {
     id: 4,
-    type: post_types.photo_album,
+    type: post_types.photo_album.value,
     title: "Dolor Purus Aenean Ultricies",
     text: "Cras mattis consectetur purus sit amet fermentum nulla vitae elit.",
     photo_src: "imgs/content-img-2.png",
@@ -55,7 +99,7 @@ let posts = [
   },
   {
     id: 5,
-    type: post_types.article,
+    type: post_types.article.value,
     title: "Tristique Risus Mattis Ullamcorper",
     text: "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nullam quis risus eget urna mollis.\n" + "\n" + "Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit consectetur.",
     date: new Date(Date.UTC(2020, 10, 19, 19, 35)),
@@ -63,7 +107,7 @@ let posts = [
   },
   {
     id: 6,
-    type: post_types.quote,
+    type: post_types.quote.value,
     quote: "Aenean eu leo quam. Pellentesque ornare lacinia quam venenatis vestibulum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nullam quis risus eget mollis.",
     author: "John Doe",
     date: new Date(Date.UTC(2020, 10, 22, 19, 35)),
@@ -71,7 +115,7 @@ let posts = [
   },
   {
     id: 7,
-    type: post_types.forum,
+    type: post_types.forum.value,
     title: "Two Best Friends",
     text: "<b>Barney</b>: Pellentesque ornare lacinia quam venenatis vestibulum." +
         "<br>" +
@@ -81,7 +125,155 @@ let posts = [
     date: new Date(Date.UTC(2020, 10, 24, 19, 35)),
     likes: 29
   },
-]
+];
+// Массив фильтров
+let filters = [
+  {
+    // Фильтр по типу постов:
+    name: 'post-type',                          // Название фильтра (используется при генерации элементов)
+    title: 'Тип поста',                         // Человеко-читаемое название фильтра
+    filterType: filtersTypes.attributeList,     // Тип фильтра (один из перечисленных в filtersTypes)
+    attribute: 'type',                          // Атрибут объекта, который испольуется для фильтрации
+    attributeNames: post_types,                 // Объект, который имеет поля с человеко-читаемыми названиями атрибутов
+  },
+  {
+    // Фильтр по количеству "лайков":
+    name: 'post-likes',                         // Название фильтра (используется при генерации элементов)
+    title: 'Количество лайков',                 // Человеко-читаемое название фильтра
+    filterType: filtersTypes.range,             // Тип фильтра (один из перечисленных в filtersTypes)
+    // Количество лайков "от 10 и выше":
+    compareType: compareTypes.greaterEqual,     // Способ сравнения атрибута объекта с значениями в ranges
+    attribute: 'likes',                         // Атрибут объекта, который испольуется для фильтрации
+    ranges: [0, 10, 50, 100, 250],              // Массив значений, с которыми будет сравниваться значение определённого артрибута объекта
+    rangesNames: ["Любое", "10+", "50+", "100+", "250+"], // Человеко-читаемое название каждого элемента ranges
+  },
+  {
+    // Фильтр по дате создания поста:
+    name: 'post-date',                          // Название фильтра (используется при генерации элементов)
+    title: 'Вышедший не позднее',               // Человеко-читаемое название фильтра
+    filterType: filtersTypes.range,             // Тип фильтра (один из перечисленных в filtersTypes)
+    // Дата создания от определённой даты и позднее:
+    compareType: compareTypes.greaterEqual,     // Способ сравнения атрибута объекта с значениями в ranges
+    attribute: 'date',                          // Атрибут объекта, который испольуется для фильтрации
+    // Количество времени в днях:
+    ranges: [3, 7, 14, 31].map(value => new Date(Date.now() - value * (24*60*60*1000))), // Массив значений, с которыми будет сравниваться значение определённого артрибута объекта
+    rangesNames: ["Трёх дней", "Недели", "Двух недель", "Месяца"], // Человеко-читаемое название каждого элемента ranges
+  },
+  {
+    // Фильтр по дате создания поста с выбором границ даты:
+    name: 'post-select-date',                   // Название фильтра (используется при генерации элементов)
+    title: 'Вышедший за период',                // Человеко-читаемое название фильтра
+    filterType: filtersTypes.userInputRange,    // Тип фильтра (один из перечисленных в filtersTypes)
+    inputType: inputTypes.date,                 // Вид input-ов, используемых для сравнения определённого атрибута
+    attribute: 'date',                          // Атрибут объекта, который испольуется для фильтрации
+    inputs: [                                   // Массив объектов, описывающих input-ы и необходимые функции для сравнения
+      {
+        label: 'С',                             // Содержимое label у соответствующего input-а
+        compareType: compareTypes.greaterEqual, // Тип сравнения с данным input-ом
+      },
+      {
+        label: 'По',                            // Содержимое label у соответствующего input-а
+        compareType: compareTypes.smallerEqual, // Тип сравнения с данным input-ом
+      },
+    ],
+  },
+];
+
+// Массив выбранных в данный момент фильтров
+// При создании групп фильтров сюда добавляется объект.
+// При изменении состояния checkbox-а меняется состояние
+let selectedFilters = [
+];
+
+// Проверяет наличие необходимых полей у объекта (данных о фильтре):
+// Возвращает true, если все поля присутствуют.
+// noinspection JSUnusedLocalSymbols
+function checkFilterData(filterData){
+  // TODO: при необходимости.
+  return true;
+}
+
+// Конструирует фильтр, возварщаея jQuery элемент, соответствующий фильтру
+function constructFilter(filterData, posts){
+  if (!checkFilterData(filterData))
+    return null;
+  // fieldset фильтра:
+  let filterFieldset = $("<fieldset/>", {'class': filterData.name});
+  // legend fieldset-а:
+  $("<legend/>").html(filterData.title).appendTo(filterFieldset);
+
+  // Конструируем фильтр исходя из типа фильтра:
+  switch (filterData.filterType) {
+    case "attributeList":
+      // Выбор одного из возможных значений атрибута
+        // Список уникальных значений данного атрибута:
+        const possibleTypes = new Set(posts.map(post => {
+          return post[filterData.attribute];
+        }));
+        possibleTypes.forEach(type => {
+          const inputId = filterData.name.concat("-").concat(type);
+          let span = $("<span/>");
+          $("<input/>",
+              {'name': filterData.name,
+                'id': inputId,
+                'type': 'checkbox',
+                'value': type,
+              })
+              .on("click", () => {
+                switchFilter(filterData.name, type);
+              })
+              .appendTo(span);
+          $("<label/>",{'for': inputId})
+              .html(filterData.attributeNames[type].name).appendTo(span);
+          span.appendTo(filterFieldset);
+        });
+        // TODO: привязать события к нажатиям checkbox-ов
+      break;
+    case "range":
+      filterData.ranges.map((value, index) =>{
+        const inputId = filterData.name.concat("-").concat(value);
+        let span = $("<span/>");
+        $("<input/>",
+            {'name': filterData.name,
+              'id': inputId,
+              'type': 'checkbox',
+              'value': value,
+            })
+            .on("click", () => {
+              switchFilter(filterData.name, value);
+            })
+            .appendTo(span);
+        $("<label/>",{'for': inputId})
+            .html(filterData.rangesNames[index]).appendTo(span);
+        span.appendTo(filterFieldset);
+      });
+      break;
+    case "userInputRange":
+      return null;
+      break;
+    default:
+      return null;
+  }
+
+  selectedFilters.push({
+    name: filterData.name,
+    filter: filterData,
+    selected: new Set(),
+  });
+
+  return filterFieldset;
+}
+
+// Загружает все фильтры, конструируя их и добавляя в соответсвующую форму
+function loadAllFilters(filters, posts){
+  const fieldset_with_buttons = $('#fieldset-with-buttons');
+
+  filters.map(filterData => {
+    let tempFilter = constructFilter(filterData, posts);
+    if (tempFilter != null)
+      tempFilter.appendTo(fieldset_with_buttons);
+  })
+}
 
 // Очищает список постов
 function clear_posts() {
@@ -105,34 +297,34 @@ function construct_post(post_data){
 
   // Заполнение блока в зависимости от типа поста:
   switch (post_data.type) {
-    case post_types.article:
+    case post_types.article.value:
       // Пост со стаьёй/текстом:
       $("<div/>", {'class': 'content-title'}).html(post_data.title).appendTo(content_block);
       $("<div/>", {'class': 'content-text'}).html(post_data.text).appendTo(content_block);
       $("<div/>", {'class': 'content-date icon-article'}).html(post_data.date.toLocaleString("ru-RU", {day: 'numeric', month: 'short', year: 'numeric'})).appendTo(content_footer);
       break;
-    case post_types.photo:
+    case post_types.photo.value:
       // Пост с фото:
       $("<img/>", {'class': 'content-image', 'src': post_data.photo_src}).appendTo(content_block);
       $("<div/>", {'class': 'content-title'}).html(post_data.title).appendTo(content_block);
       $("<div/>", {'class': 'content-text'}).html(post_data.text).appendTo(content_block);
       $("<div/>", {'class': 'content-date icon-photo'}).html(post_data.date.toLocaleString("ru-RU", {day: 'numeric', month: 'short', year: 'numeric'})).appendTo(content_footer);
       break;
-    case post_types.photo_album:
+    case post_types.photo_album.value:
       // Пост с альбомом фото:
       $("<img/>", {'class': 'content-image', 'src': post_data.photo_src}).appendTo(content_block);
       $("<div/>", {'class': 'content-title'}).html(post_data.title).appendTo(content_block);
       $("<div/>", {'class': 'content-text'}).html(post_data.text).appendTo(content_block);
       $("<div/>", {'class': 'content-date icon-album'}).html(post_data.date.toLocaleString("ru-RU", {day: 'numeric', month: 'short', year: 'numeric'})).appendTo(content_footer);
       break;
-    case post_types.video:
+    case post_types.video.value:
       // Пост с видео:
       $("<img/>", {'class': 'content-image', 'src': post_data.video_src}).appendTo(content_block);
       $("<div/>", {'class': 'content-title'}).html(post_data.title).appendTo(content_block);
       $("<div/>", {'class': 'content-text'}).html(post_data.text).appendTo(content_block);
       $("<div/>", {'class': 'content-date icon-video'}).html(post_data.date.toLocaleString("ru-RU", {day: 'numeric', month: 'short', year: 'numeric'})).appendTo(content_footer);
       break;
-    case post_types.music:
+    case post_types.music.value:
       // Пост с музыкой:
       let music_container = $("<div/>", {'class': 'container flex flex-row music-container'});
       let music_album_container = $("<div/>", {'class': 'container flex flex-row music-album-container'});
@@ -155,13 +347,13 @@ function construct_post(post_data){
       $("<div/>", {'class': 'content-text'}).html(post_data.text).appendTo(content_block);
       $("<div/>", {'class': 'content-date icon-video'}).html(post_data.date.toLocaleString("ru-RU", {day: 'numeric', month: 'short', year: 'numeric'})).appendTo(content_footer);
       break;
-    case post_types.quote:
+    case post_types.quote.value:
       // Пост со цитатой:
       $("<div/>", {'class': 'content-quote'}).html(post_data.quote).appendTo(content_block);
       $("<div/>", {'class': 'content-author'}).html(post_data.author).appendTo(content_block);
       $("<div/>", {'class': 'content-date icon-quote'}).html(post_data.date.toLocaleString("ru-RU", {day: 'numeric', month: 'short', year: 'numeric'})).appendTo(content_footer);
       break;
-    case post_types.forum:
+    case post_types.forum.value:
       // Пост с диалогом/форумом:
       $("<div/>", {'class': 'content-title'}).html(post_data.title).appendTo(content_block);
       $("<div/>", {'class': 'content-text'}).html(unescape(post_data.text)).appendTo(content_block);
@@ -208,7 +400,47 @@ function switch_print_version(){
   window.scrollTo(0,0);
 }
 
-// Фильтрует посты по параметрам, установленным в input-ах
+// Добавляет или удаляет значение value элемента в соответствующий массив selectedFilters
+function switchFilter(filterName, filterValue) {
+  const setToLook = selectedFilters.find(value => value.name === filterName).selected;
+  if (setToLook.has(filterValue)){
+    setToLook.delete(filterValue);
+  }
+  else{
+    setToLook.add(filterValue);
+  }
+
+  filter(posts, selectedFilters);
+}
+
+// Фильтрует посты по параметрам selectedFilters
+function filter(posts, selectedFilters){
+  // Копируем список постов:
+  let newPosts = [...posts];
+  // Для каждого фильтра...
+  selectedFilters.map(filter => {
+    // Исходя из типа фильтра делаем по-своему:
+    switch (filter.filter.filterType){
+      case "attributeList":
+        // Для выбора из списка атрибутов фильтруем newPosts на вхожение post.type в массив (Set) selected.
+        // Если такой тип там есть, оставляем пост, иначе - удаляем из выборки.
+        if (filter.selected.size === 0)
+          break;
+        newPosts = newPosts.filter(post => {
+          return filter.selected.has(post.type);
+        });
+        break;
+      case "range":
+        // TODO
+        break;
+      case "userInputRange":
+        // TODO
+        break;
+    }
+  });
+  show_all_posts(newPosts);
+}
+/*
 function filter_posts(event){
   let clicked_input_name = event.currentTarget.name;
 
@@ -348,12 +580,14 @@ function filter_posts(event){
 
   // event.preventDefault();
 }
+*/
 
 // Проходится по массиву posts, делая неактивными те настройки фильтров,
 // которые будут давать пустые резуьтаты.
 // При установки одного из флагов block_... в false соседние флаги
 // этого типа не будут блокироваться (полезно при подборе необходимого
 // флиьтра при использовании сайта).
+/*
 function correct_filter_settings(posts,
                                  block_types = true,
                                  block_likes = true,
@@ -418,9 +652,11 @@ function correct_filter_settings(posts,
   // console.log('okay');
 }
 
+*/
 // Выполняется при полной загрузке страницы
 $(document).ready( () => {
   $("#print-version-button").on("click", switch_print_version);
+  /*
   $('input[name="post-date-sooner"]').on("click", () => {$('#date-sooner')[0].checked = true;});
 
   $('input[name="post-date-from-to"]').on("click", () => {$('#date-from-to')[0].checked = true;});
@@ -444,6 +680,9 @@ $(document).ready( () => {
 
   // Устанавливаем настройки фильтра постов:
   correct_filter_settings(posts);
+  */
   show_all_posts(posts);
+
+  loadAllFilters(filters, posts);
 })
 
