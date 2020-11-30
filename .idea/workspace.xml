@@ -22,9 +22,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49f7270e-48df-426c-a402-4f18e154ef91" name="Default Changelist" comment="Сданная лабораторная. Проблемы: не динамиечкие характеристики товара.">
+    <list default="true" id="49f7270e-48df-426c-a402-4f18e154ef91" name="Default Changelist" comment="Динамические фильтры. Остановился на описании алгоритмов фильтрации.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +83,7 @@
       <workItem from="1606198062745" duration="13863000" />
       <workItem from="1606231995681" duration="883000" />
       <workItem from="1606752597907" duration="162000" />
-      <workItem from="1606768244210" duration="8439000" />
+      <workItem from="1606768244210" duration="9189000" />
     </task>
     <task id="LOCAL-00001" summary="Рабочая динамическая загрузка содержимого страницы.">
       <created>1606153969649</created>
@@ -163,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606768298643</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Динамические фильтры. Остановился на описании алгоритмов фильтрации.">
+      <created>1606776795887</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1606776795887</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,7 +199,8 @@
     <MESSAGE value="Комментарии к коду." />
     <MESSAGE value="Сданная лабораторная. Проблемы: не динамиечкие характеристики товара." />
     <MESSAGE value="Скрытие списка фильтров." />
-    <option name="LAST_COMMIT_MESSAGE" value="Скрытие списка фильтров." />
+    <MESSAGE value="Динамические фильтры. Остановился на описании алгоритмов фильтрации." />
+    <option name="LAST_COMMIT_MESSAGE" value="Динамические фильтры. Остановился на описании алгоритмов фильтрации." />
   </component>
   <component name="WindowStateProjectService">
     <state x="531" y="285" key="#Configure_Path_Variables" timestamp="1606168746413">
@@ -284,10 +291,10 @@
       <screen x="0" y="0" width="1460" height="864" />
     </state>
     <state x="14" y="67" key="SettingsEditor/0.0.1460.864@0.0.1460.864" timestamp="1606152470147" />
-    <state x="323" y="165" key="Vcs.Push.Dialog.v2" timestamp="1606768300190">
+    <state x="323" y="165" key="Vcs.Push.Dialog.v2" timestamp="1606776798102">
       <screen x="0" y="0" width="1460" height="864" />
     </state>
-    <state x="323" y="165" key="Vcs.Push.Dialog.v2/0.0.1460.864@0.0.1460.864" timestamp="1606768300190" />
+    <state x="323" y="165" key="Vcs.Push.Dialog.v2/0.0.1460.864@0.0.1460.864" timestamp="1606776798102" />
     <state x="387" y="197" key="run.anything.popup" timestamp="1606153602238">
       <screen x="0" y="0" width="1460" height="864" />
     </state>

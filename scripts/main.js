@@ -422,16 +422,42 @@ function filter(posts, selectedFilters){
     // Исходя из типа фильтра делаем по-своему:
     switch (filter.filter.filterType){
       case "attributeList":
-        // Для выбора из списка атрибутов фильтруем newPosts на вхожение post.type в массив (Set) selected.
+        // Для выбора из списка атрибутов фильтруем newPosts на вхожение post.type (в общем случае - post[filter.filter.attribute]) в массив (Set) selected.
         // Если такой тип там есть, оставляем пост, иначе - удаляем из выборки.
         if (filter.selected.size === 0)
           break;
         newPosts = newPosts.filter(post => {
-          return filter.selected.has(post.type);
+          return filter.selected.has(post[filter.filter.attribute]);
         });
         break;
       case "range":
-        // TODO
+        // Для выбора из диапазона, сперва находим min/max или equal значение, а затем фильтруем как выше.
+        if (filter.selected.size === 0)
+          break;
+        switch (filter.filter.compareType) {
+          case compareTypes.greater:
+          case compareTypes.greaterEqual:
+            // Находим наименьший элемент
+            let min = filter.selected.values().next().value;
+            filter.selected.forEach(value => {if (value < min) min = value;});
+            newPosts = newPosts.filter(post => {
+              return filter.filter.compareType(post[filter.filter.attribute], min);
+            });
+            break;
+          case compareTypes.smaller:
+          case compareTypes.smallerEqual:
+            // Находим наибольший элемент
+            let max = filter.selected.values().next().value;
+            filter.selected.forEach(value => {if (value > max) max = value;});
+            newPosts = newPosts.filter(post => {
+              return filter.filter.compareType(post[filter.filter.attribute], max);
+            });
+            break;
+          case compareTypes.equal:
+          case compareTypes.notEqual:
+            // TODO: реализовать при необходимости
+            break;
+        }
         break;
       case "userInputRange":
         // TODO
